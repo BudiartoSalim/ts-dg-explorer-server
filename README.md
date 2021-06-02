@@ -11,6 +11,8 @@ This is a portfolio project for an "online single player" RPG game using Typescr
 
 Game concept will be auto-battle dungeon crawler with permadeath concept for characters. Players in concept will act as if they're a guild, able to assign characters they own to a party of 4 to explore dungeons.
 
+This repository is for the server part of the project. Client repository will be added later after the backend basic functions are ready.
+
 # PLANNED ENDPOINTS
 - Register (Google Sign In?)
 - Login
