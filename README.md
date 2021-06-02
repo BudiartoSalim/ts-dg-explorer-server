@@ -6,6 +6,11 @@ Commands:
 - npm run build
 - npm start
 
+# PROJECT DESCRIPTION
+This is a portfolio project for an "online single player" RPG game using Typescript, with no ORM. The game will not have any direct online interaction, but the plan is to have it save the progress and have ranking system.
+
+Game concept will be auto-battle dungeon crawler with permadeath concept for characters. Players in concept will act as if they're a guild, able to assign characters they own to a party of 4 to explore dungeons.
+
 # PLANNED ENDPOINTS
 - Register (Google Sign In?)
 - Login
