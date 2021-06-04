@@ -1,3 +1,1 @@
-import { players_init } from './players_init';
-
-export { players_init }
+// queries for table constraints that cannot be defined upon table creations will be added here
