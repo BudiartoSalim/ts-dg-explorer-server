@@ -1,3 +1,5 @@
+// players.name is not in the ERD yet, do not forget to modify the ERD for consistency
+
 export const players_init =
   `CREATE TABLE IF NOT EXISTS "players" (
   id SERIAL PRIMARY KEY,

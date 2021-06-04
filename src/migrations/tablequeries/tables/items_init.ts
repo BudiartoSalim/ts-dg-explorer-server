@@ -1,3 +1,6 @@
+// items.type = type of the item (weapon, armor, accessory, consumable, etc)
+// items.effect = will be the identifier for the effects and its assigned logic
+// items.effect_power = will be the value of the effect strength
 export const items_init =
   `CREATE TABLE IF NOT EXISTS "items" (
     id SERIAL PRIMARY KEY,
