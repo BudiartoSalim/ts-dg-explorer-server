@@ -16,6 +16,7 @@ async function migrateTables() {
 
   } catch (err) {
     console.log(err);
+  } finally {
     client.release();
   }
 }
