@@ -5,7 +5,7 @@
 // first_consumable_id and second_consumable_id = items.id with "consumables" type
 // first_skill_id and second_skill_id = skills.id
 
-export const equips_init =
+export const equips_fk_init =
   `ALTER TABLE "equips" (
     ADD CONSTRAINT fk_first_skill
       FOREIGN KEY (first_skill_id)
