@@ -1,6 +1,6 @@
 //combat status = win / lose / in progress / enemy turn next / etc
 export const combat_sessions_init =
-  `CREATE TABLE IF NOT EXISTS "combat_sessions" (
+  `CREATE TABLE IF NOT EXISTS "combat_sessions"(
     id SERIAL PRIMARY KEY,
     party_id INTEGER,
     area_id INTEGER,

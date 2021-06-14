@@ -1,5 +1,5 @@
 export const class_skills_init =
-  `CREATE TABLE IF NOT EXISTS "class_skills" (
+  `CREATE TABLE IF NOT EXISTS "class_skills"(
   class_id INTEGER NOT NULL,
   skill_id INTEGER NOT NULL,
   created_at TIMESTAMPTZ,
