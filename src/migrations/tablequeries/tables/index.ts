@@ -14,7 +14,7 @@ import { status_effects_init } from './status_effects_init';
 import { unit_status_effects_init } from './unit_status_effects_init';
 import { units_init } from './units_init';
 
-export {
+export default [
   areas_init,
   class_skills_init,
   classes_init,
@@ -29,5 +29,5 @@ export {
   skills_init,
   status_effects_init,
   unit_status_effects_init,
-  units_init
-};
+  units_init]
+  ;

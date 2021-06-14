@@ -8,7 +8,7 @@ import { parties_fk_init } from './parties_fk';
 import { unit_status_effects_fk_init } from './unit_status_effects_fk';
 import { units_fk_init } from './units_fk';
 
-export {
+export default [
   class_skills_fk_init,
   combat_sessions_fk_init,
   drops_fk_init,
@@ -18,4 +18,4 @@ export {
   parties_fk_init,
   unit_status_effects_fk_init,
   units_fk_init
-};
+];
