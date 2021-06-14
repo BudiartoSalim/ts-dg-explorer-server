@@ -6,7 +6,7 @@
 // first_skill_id and second_skill_id = skills.id
 
 export const equips_init =
-  `CREATE TABLE IF NOT EXISTS "equips" (
+  `CREATE TABLE IF NOT EXISTS "equips"(
     id SERIAL PRIMARY KEY,
     first_skill_id INTEGER,
     second_skill_id INTEGER,

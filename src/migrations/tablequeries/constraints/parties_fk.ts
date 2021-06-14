@@ -1,6 +1,6 @@
 
 export const parties_fk_init =
-  `ALTER TABLE "parties" (
+  `ALTER TABLE "parties"
     ADD CONSTRAINT fk_party_owner_id
       FOREIGN KEY (player_id)
         REFERENCES "players"(id)
@@ -21,4 +21,4 @@ export const parties_fk_init =
       FOREIGN KEY (fourth_unit_id)
         REFERENCES "units"(id)
         ON DELETE SET NULL
-);`;
+;`;

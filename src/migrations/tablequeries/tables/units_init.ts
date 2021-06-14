@@ -1,6 +1,6 @@
 
 export const units_init =
-  `CREATE TABLE IF NOT EXISTS "units" (
+  `CREATE TABLE IF NOT EXISTS "units"(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     gender VARCHAR(6),

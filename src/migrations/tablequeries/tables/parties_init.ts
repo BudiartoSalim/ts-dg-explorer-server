@@ -1,6 +1,6 @@
 
 export const parties_init =
-  `CREATE TABLE IF NOT EXISTS "parties" (
+  `CREATE TABLE IF NOT EXISTS "parties"(
     id SERIAL PRIMARY KEY,
     player_id INTEGER,
     first_unit_id INTEGER,

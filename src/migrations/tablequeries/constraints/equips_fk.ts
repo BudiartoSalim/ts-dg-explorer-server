@@ -6,7 +6,7 @@
 // first_skill_id and second_skill_id = skills.id
 
 export const equips_fk_init =
-  `ALTER TABLE "equips" (
+  `ALTER TABLE "equips"
     ADD CONSTRAINT fk_first_skill
       FOREIGN KEY (first_skill_id)
         REFERENCES "skills"(id)
@@ -39,4 +39,4 @@ export const equips_fk_init =
       FOREIGN KEY (second_consumable_item_id)
         REFERENCES "items"(id)
         ON DELETE SET NULL
-);`;
+;`;

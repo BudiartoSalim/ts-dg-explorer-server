@@ -2,7 +2,7 @@
 // skills.effect will be the effect identifier which defines the logic of the skill mechanism (atkup, heal, singletargetdmg, multitargetdmg, and so on)
 // skills.effect_power will be used to adjust the skill's power
 export const skills_init =
-  `CREATE TABLE IF NOT EXISTS "skills" (
+  `CREATE TABLE IF NOT EXISTS "skills"(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     description VARCHAR(255),

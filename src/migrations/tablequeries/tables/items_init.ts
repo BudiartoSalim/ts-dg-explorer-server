@@ -2,7 +2,7 @@
 // items.effect = will be the identifier for the effects and its assigned logic
 // items.effect_power = will be the value of the effect strength
 export const items_init =
-  `CREATE TABLE IF NOT EXISTS "items" (
+  `CREATE TABLE IF NOT EXISTS "items"(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     description VARCHAR(255),

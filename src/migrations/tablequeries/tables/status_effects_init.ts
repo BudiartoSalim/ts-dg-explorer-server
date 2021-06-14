@@ -2,7 +2,7 @@
 // effect_type decides the logic
 // base_power decides the power
 export const status_effects_init =
-  `CREATE TABLE IF NOT EXISTS "status_effects" (
+  `CREATE TABLE IF NOT EXISTS "status_effects"(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     type VARCHAR(255),
