@@ -4,7 +4,16 @@ DO NOT FORGET TO NPM INSTALL FIRST!!
 Commands:
 - npm run dev
 - npm run build
+- npm run devmigrate  //to do migration on local development environment
 - npm start
+
+# TO DO
+- Registration CRUD
+- Seed data
+- Create Characters (purchase random character)
+- Create Party (assign up to 4 characters in party)
+- Assign equip
+- Combat 
 
 # PROJECT DESCRIPTION
 This is a portfolio project for an "online single player" RPG game using Typescript, with no ORM. The game will not have any direct online interaction, but the plan is to have it save the progress and have ranking system.
