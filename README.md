@@ -3,6 +3,8 @@ DO NOT FORGET TO NPM INSTALL FIRST!!
 
 DO NOT FORGET TO ALSO CREATE THE DATABASE AND POPULATE ENV VARIABLE FIRST!
 
+database name is in env, there is no script for making the database.
+
 Commands:
 - npm run dev
 - npm run build
