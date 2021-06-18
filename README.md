@@ -1,6 +1,8 @@
 # ts-dg-explorer-server
 DO NOT FORGET TO NPM INSTALL FIRST!!
 
+DO NOT FORGET TO ALSO CREATE THE DATABASE AND POPULATE ENV VARIABLE FIRST!
+
 Commands:
 - npm run dev
 - npm run build
