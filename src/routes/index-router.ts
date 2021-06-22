@@ -1,8 +1,8 @@
 import express from 'express';
-import PlayerController from '../controllers/player-controller';
 const router = express.Router();
+import PlayerRouter from './player-router';
 
-router.get('/', PlayerController.fetchUserDataHandler);
-router.post('/', PlayerController.registerUserHandler);
+router.use('/player', PlayerRouter);
+router.get('/', (req, res, next) => { res.status(200).json({ message: "hellow" }) })
 
 export default router;
