@@ -1,4 +1,4 @@
-export interface IPlayer {
+export interface IPlayerFullData {
   id: number;
   email: string;
   name: string;
@@ -8,6 +8,20 @@ export interface IPlayer {
   next_xp: number;
   rank: number;
   rank_cap: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface IPlayer {
+  id: number;
+  email: string;
+  name: string;
+  password?: string;
+  money: number;
+  current_xp: number;
+  next_xp: number;
+  rank: number;
+  rank_cap: number;
+  created_at?: Date;
+  updated_at?: Date;
 }
