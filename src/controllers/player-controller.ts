@@ -10,6 +10,10 @@ export default class PlayerController {
       if (typeof req.body.name !== 'string' || validator.isByteLength(req.body.name, { min: 1, max: 255 }) === false) { throw "name-invalid-length" };
       if (typeof req.body.password !== 'string' || validator.isByteLength(req.body.password, { min: 6 }) === false) { throw "password-invalid-length" };
 
+      //input sanitizers
+      req.body.email = validator.trim(req.body.email);
+      req.body.name = validator.trim(req.body.name);
+
       res.status(200).json('passed all');
     } catch (err) {
       next(err);
