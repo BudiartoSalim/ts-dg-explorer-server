@@ -3,8 +3,8 @@ export interface IItem {
   name: string;
   description: string;
   type: string;
-  effect: string;
-  effect_power: number;
+  effect?: string;
+  effect_power?: number;
   base_price: number;
   equip_stat_hp: number;
   equip_stat_atk: number;
