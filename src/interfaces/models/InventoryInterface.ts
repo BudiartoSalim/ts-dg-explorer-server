@@ -1,7 +1,7 @@
+import { IItem } from "./IItem";
 export interface IInventory {
-  item_id: number;
-  player_id: number;
-  quantity?: number;
+  item: IItem;
+  quantity: number;
   created_at?: Date;
   updated_at?: Date;
 }

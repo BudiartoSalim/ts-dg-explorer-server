@@ -1,5 +1,6 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
 import validator from 'validator';
+import Player from '../models/player-model';
 
 export default class PlayerController {
   static async registerUserHandler(req: IRequest, res: IResponse, next: INext) {
@@ -14,7 +15,15 @@ export default class PlayerController {
       req.body.email = validator.trim(req.body.email);
       req.body.name = validator.trim(req.body.name);
 
-      res.status(200).json('passed all');
+      const newPlayer = await Player.registerPlayer({
+        email: req.body.email,
+        name: req.body.name,
+        password: req.body.password
+      });
+
+
+
+      res.status(200).json(newPlayer);
     } catch (err) {
       next(err);
     }
