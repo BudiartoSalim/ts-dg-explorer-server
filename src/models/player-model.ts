@@ -18,6 +18,9 @@ export default class Player {
       const salt = bcrypt.genSaltSync(12);
       const hashedPassword = bcrypt.hashSync(pw, salt);
       const currentTime = new Date().toISOString();
+
+      // begin transaction
+      await client.query('BEGIN');
       const newPlayer = await client.query(`INSERT INTO 
       players(name, email, password, money, current_xp, next_xp, rank, rank_cap, created_at, updated_at) 
       VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) 
@@ -26,9 +29,11 @@ export default class Player {
 
       const newPlayerParty = await client.query(`INSERT INTO 
       parties(player_id, created_at, updated_at) 
-      VALUES ($1,$2,$3) 
-      RETURNING *;`,
+      VALUES ($1,$2,$3) RETURNING *;`,
         [newPlayer.rows[0].id, currentTime, currentTime]);
+
+      // commit transaction
+      await client.query('COMMIT');
 
       const playerData: IPlayer = {
         id: newPlayer.rows[0].id,
@@ -43,6 +48,9 @@ export default class Player {
 
       return playerData;
     } catch (err) {
+      // if transaction fails, rollback
+      await client.query('ROLLBACK');
+      if (err.constraint === 'players_email_key') { throw 'email-already-exists' };
       throw { err };
     } finally {
       client.release();

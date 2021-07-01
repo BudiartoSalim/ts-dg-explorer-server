@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== 'production') { require('dotenv').config() };
 import express from 'express';
-import router from './routes/index-router';
+import router from './routes';
 import cors from 'cors';
 import errorHandler from './middlewares/error-handler';
 
