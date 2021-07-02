@@ -3,7 +3,7 @@ import { IParty } from "./PartyInterfaces";
 
 export interface IPlayerCreds {
   email: string;
-  name: string;
+  name?: string;
   password: string;
 }
 
