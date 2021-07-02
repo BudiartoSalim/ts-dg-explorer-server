@@ -4,6 +4,36 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 
 export default class Player {
+
+  static firsthash(pw: string) {
+    const secret = process.env.AUTH_SECRET as string;
+    return crypto.createHmac('SHA256', secret).update(pw).digest('hex');
+  }
+
+  static async loginPlayer(player: IPlayerCreds) {
+    const client = await pool.connect();
+    try {
+      const pw = this.firsthash(player.password);
+      const playerData = await client.query(
+        `SELECT * FROM players WHERE players.email = $1 LIMIT 1;`, [player.email]
+      );
+      if (playerData.rows.length === 1) {
+        if (bcrypt.compareSync(pw, playerData.rows[0].password)) {
+          //generate token
+          const token = 's'
+          return token;
+        }
+      }
+
+      throw 'wrong-password'
+
+    } catch (err) {
+      throw err;
+    } finally {
+      client.release();
+    }
+  }
+
   static async registerPlayer(player: IPlayerCreds): Promise<IPlayer> {
     const client = await pool.connect();
     try {
@@ -21,16 +51,21 @@ export default class Player {
 
       // begin transaction
       await client.query('BEGIN');
-      const newPlayer = await client.query(`INSERT INTO 
-      players(name, email, password, money, current_xp, next_xp, rank, rank_cap, created_at, updated_at) 
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) 
-      RETURNING *;`,
-        [player.name, player.email, hashedPassword, startingMoney, 0, startingLevelUpReq, startingRank, rankCap, currentTime, currentTime]);
 
-      const newPlayerParty = await client.query(`INSERT INTO 
-      parties(player_id, created_at, updated_at) 
-      VALUES ($1,$2,$3) RETURNING *;`,
-        [newPlayer.rows[0].id, currentTime, currentTime]);
+      const newPlayer = await client.query(
+        `INSERT INTO 
+        players(name, email, password, money, current_xp, next_xp, rank, rank_cap, created_at, updated_at) 
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) 
+        RETURNING *;`,
+        [player.name, player.email, hashedPassword, startingMoney, 0, startingLevelUpReq, startingRank, rankCap, currentTime, currentTime]
+      );
+
+      const newPlayerParty = await client.query(
+        `INSERT INTO 
+        parties(player_id, created_at, updated_at) 
+        VALUES ($1,$2,$3) RETURNING *;`,
+        [newPlayer.rows[0].id, currentTime, currentTime]
+      );
 
       // commit transaction
       await client.query('COMMIT');
