@@ -11,6 +11,7 @@ export const players_init =
   next_xp INTEGER,
   rank INTEGER,
   rank_cap INTEGER,
+  session STRING,
   created_at TIMESTAMPTZ,
   updated_at TIMESTAMPTZ,
   UNIQUE(email)
