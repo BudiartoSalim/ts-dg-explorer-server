@@ -19,6 +19,7 @@ export interface IPlayer {
   rank_cap: number;
   party?: IParty;
   inventory?: IInventory[];
+  session?: string;
   created_at?: Date;
   updated_at?: Date;
 }

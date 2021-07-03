@@ -2,8 +2,10 @@ import { IPlayer, IPlayerCreds } from "../interfaces/models/PlayerInterfaces";
 import pool from "../dbconfig/postgres";
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 
 export default class Player {
+
 
   static firsthash(pw: string) {
     const secret = process.env.AUTH_SECRET as string;
@@ -14,14 +16,22 @@ export default class Player {
     const client = await pool.connect();
     try {
       const pw = this.firsthash(player.password);
-      const playerData = await client.query(
+      const queryResult = await client.query(
         `SELECT * FROM players WHERE players.email = $1 LIMIT 1;`, [player.email]
       );
-      if (playerData.rows.length === 1) {
-        if (bcrypt.compareSync(pw, playerData.rows[0].password)) {
+      if (queryResult.rows.length === 1) {
+        const playerData = queryResult.rows[0];
+        if (bcrypt.compareSync(pw, playerData.password)) {
           //generate token
-          const token = 's'
-          return token;
+          const accessToken = jwt.sign({}, process.env.ACCESS_SECRET as string);
+          const playerSession = crypto.createHmac('SHA256', process.env.SES_SECRET as string).update(accessToken).digest('hex');
+          await client.query(
+            `UPDATE players
+            SET session = $1
+            WHERE players.id = $2;`,
+            [playerSession, playerData.id]
+          )
+          return accessToken;
         }
       }
 
@@ -34,6 +44,7 @@ export default class Player {
     }
   }
 
+
   static async registerPlayer(player: IPlayerCreds): Promise<IPlayer> {
     const client = await pool.connect();
     try {
@@ -43,8 +54,7 @@ export default class Player {
       const startingRank = 1;
       const rankCap = 100;
 
-      const secret = process.env.AUTH_SECRET as string;
-      const pw = crypto.createHmac('SHA256', secret).update(player.password).digest('hex');
+      const pw = this.firsthash(player.password);
       const salt = bcrypt.genSaltSync(12);
       const hashedPassword = bcrypt.hashSync(pw, salt);
       const currentTime = new Date().toISOString();
