@@ -60,7 +60,7 @@ export default class Player {
       const currentTime = new Date().toISOString();
 
       // begin transaction
-      await client.query('BEGIN');
+      await client.query('BEGIN;');
 
       const newPlayer = await client.query(
         `INSERT INTO 
@@ -78,7 +78,7 @@ export default class Player {
       );
 
       // commit transaction
-      await client.query('COMMIT');
+      await client.query('COMMIT;');
 
       const playerData: IPlayer = {
         id: newPlayer.rows[0].id,
