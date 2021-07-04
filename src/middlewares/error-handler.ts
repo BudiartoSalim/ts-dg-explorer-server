@@ -11,12 +11,17 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   error.unhandledError ? unhandledError(error, res) : res.status(error.status).json({ errorMessage: error.message });
 };
 
-function errorDef(err: unknown): IError {
-  if (err === 'email-empty') { return { status: 400, message: "Email must not be empty." } };
-  if (err === 'email-invalid-format') { return { status: 400, message: "Email given is not in a valid email format." } };
-  if (err === 'name-invalid-length') { return { status: 400, message: "Name must be between 1 - 255 characters long." } };
-  if (err === 'password-invalid-length') { return { status: 400, message: "Password must be at least 6 characters long." } };
-  if (err === 'email-already-exists') { return { status: 400, message: "Email already used." } };
+function errorDef(err: string | unknown): IError {
+  const errors: { [k: string]: IError } = {
+    'email-empty': { status: 400, message: "Email must not be empty." },
+    'email-invalid-format': { status: 400, message: "Email given is not in a valid email format." },
+    'name-invalid-length': { status: 400, message: "Name must be between 1 - 255 characters long." },
+    'password-invalid-length': { status: 400, message: "Password must be at least 6 characters long." },
+    'email-already-exists': { status: 400, message: "Email already used." },
+    'wrong-password': { status: 400, message: "Email/Password is incorrect." }
+  }
+
+  if (typeof err === 'string' && errors[err]) { return errors[err]; };
 
   return { status: 500, message: "Internal Server Error", unhandledError: err };
 }
