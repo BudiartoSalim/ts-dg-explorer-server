@@ -1,19 +1,28 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
-import validator from 'validator';
 import Player from '../models/player-model';
 
 export default class PlayerController {
+
+  static async loginUserHandler(req: IRequest, res: IResponse, next: INext) {
+    try {
+      const email = Player.emailValidatorAndSanitizer(req.body.email);
+      const password = Player.passwordValidatorAndSanitizer(req.body.password);
+
+      const accessToken = await Player.loginPlayer({ email, password })
+      res.status(200).json({ result: accessToken });
+    } catch (err) {
+      next(err);
+    }
+
+  }
+
+
+
   static async registerUserHandler(req: IRequest, res: IResponse, next: INext) {
     try {
-      //input validators
-      if (typeof req.body.email !== 'string' || validator.isEmpty(req.body.email)) { throw "email-empty" };
-      if (validator.isEmail(req.body.email) === false) { throw "email-invalid-format" };
-      if (typeof req.body.name !== 'string' || validator.isByteLength(req.body.name, { min: 1, max: 255 }) === false) { throw "name-invalid-length" };
-      if (typeof req.body.password !== 'string' || validator.isByteLength(req.body.password, { min: 6 }) === false) { throw "password-invalid-length" };
-
-      //input sanitizers
-      req.body.email = validator.trim(req.body.email);
-      req.body.name = validator.trim(req.body.name);
+      req.body.email = Player.emailValidatorAndSanitizer(req.body.email);
+      req.body.password = Player.passwordValidatorAndSanitizer(req.body.password);
+      req.body.name = Player.nameValidatorAndSanitizer(req.body.name);
 
       const newPlayer = await Player.registerPlayer({
         email: req.body.email,
