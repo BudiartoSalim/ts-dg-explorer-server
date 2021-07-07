@@ -13,13 +13,13 @@ export interface IPlayer {
   name: string;
   password?: string;
   money: number;
-  current_xp: number;
-  next_xp: number;
+  currentXp: number;
+  nextXp: number;
   rank: number;
-  rank_cap: number;
+  rankCap: number;
   party?: IParty;
   inventory?: IInventory[];
   session?: string;
-  created_at?: Date;
-  updated_at?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

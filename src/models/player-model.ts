@@ -4,6 +4,9 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
+import { PoolClient } from "pg";
+import { IParty } from "../interfaces/models/PartyInterfaces";
+import { IUnit } from "../interfaces/models/UnitInterfaces";
 
 export default class Player {
   // VALIDATORS AND SANITIZERS SECTION HERE //
@@ -32,6 +35,7 @@ export default class Player {
   ////// END OF SANITIZERS //////
   ///////////////////////////////
 
+
   // UTILITIES SECTION //
   // all methods in this section should be filled with utilities for Player model that are used in multiple parts
   // IMPORTANT! reuse utilities when makes sense only!! 
@@ -42,6 +46,18 @@ export default class Player {
     return crypto.createHmac('SHA256', secret).update(pw).digest('hex');
   }
 
+  static async generateSession(psqlClient: PoolClient, id: number, name: string) {
+    const accessToken = jwt.sign({ id, name }, process.env.ACCESS_SECRET as string, { expiresIn: '1d' });
+    const playerSession = crypto.createHmac('SHA256', process.env.SES_SECRET as string).update(accessToken).digest('hex');
+    await psqlClient.query(
+      `UPDATE players
+            SET session = $1
+            WHERE players.id = $2;`,
+      [playerSession, id]
+    );
+    return accessToken;
+  }
+
   ////// END OF UTILITIES //////
   //////////////////////////////
 
@@ -49,7 +65,7 @@ export default class Player {
   //////////////////////////////////////////////////
   // ALL METHODS BELOW ARE CORE API FUNCTIONALITY //
 
-  static async loginPlayer(player: IPlayerCreds) {
+  static async loginPlayer(player: IPlayerCreds): Promise<{ accessToken: string, playerData: IPlayer }> {
     const client = await pool.connect();
     try {
       const pw = Player.passwordFirstHash(player.password);
@@ -60,16 +76,20 @@ export default class Player {
         const playerData = queryResult.rows[0];
         if (bcrypt.compareSync(pw, playerData.password)) {
           //generate token, create session hash, and saving to db. might refactor to utilities later
-          const accessToken = jwt.sign({}, process.env.ACCESS_SECRET as string);
-          const playerSession = crypto.createHmac('SHA256', process.env.SES_SECRET as string).update(accessToken).digest('hex');
-          await client.query(
-            `UPDATE players
-            SET session = $1
-            WHERE players.id = $2;`,
-            [playerSession, playerData.id]
-          );
+          const accessToken = await Player.generateSession(client, playerData.id, playerData.name);
 
-          return accessToken;
+          return {
+            accessToken,
+            playerData: {
+              id: playerData.id,
+              name: playerData.name,
+              money: playerData.money,
+              currentXp: playerData.current_xp,
+              nextXp: playerData.next_xp,
+              rank: playerData.rank,
+              rankCap: playerData.rank_cap,
+            }
+          };
         }
       }
 
@@ -86,7 +106,7 @@ export default class Player {
     const client = await pool.connect();
     try {
       // initial values for new players, might refactor to separate editable files instead of hardcoded
-      const startingMoney = 1000;
+      const startingMoney = 10000;
       const startingLevelUpReq = 100;
       const startingRank = 1;
       const rankCap = 100;
@@ -121,10 +141,10 @@ export default class Player {
         id: newPlayer.rows[0].id,
         name: newPlayer.rows[0].name,
         money: newPlayer.rows[0].money,
-        current_xp: newPlayer.rows[0].current_xp,
-        next_xp: newPlayer.rows[0].next_xp,
+        currentXp: newPlayer.rows[0].current_xp,
+        nextXp: newPlayer.rows[0].next_xp,
         rank: newPlayer.rows[0].rank,
-        rank_cap: newPlayer.rows[0].rank_cap,
+        rankCap: newPlayer.rows[0].rank_cap,
         party: newPlayerParty.rows[0]
       }
 
