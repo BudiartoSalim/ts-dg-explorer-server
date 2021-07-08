@@ -17,23 +17,21 @@ export default class Unit {
     }
    */
 
-  /*   static async getUnitsFromParty(party: IParty): Promise<IParty> {
-      const client = await pool.connect();
-      try {
-  
-        const queryResults = await Promise.all(query);
-  
-      } catch (err) {
-        throw err;
-      } finally {
-        client.release();
-      }
-    } */
+  static async getUnitByIdAsync(unitId: number) {
+    const client = await pool.connect();
+    try {
+      return client.query('SELECT * FROM units WHERE id = $1 LIMIT 1;', [unitId]);
+    } catch (err) {
+      throw err;
+    } finally {
+      client.release();
+    }
+  }
 
   static async getUnitById(unitId: number): Promise<IUnit> {
     const client = await pool.connect();
     try {
-      const unitDataRows = await client.query('SELECT * FROM units WHERE id = $1;', [unitId]);
+      const unitDataRows = await client.query('SELECT * FROM units WHERE id = $1 LIMIT 1;', [unitId]);
       const unitData = unitDataRows.rows[0];
 
       return {
