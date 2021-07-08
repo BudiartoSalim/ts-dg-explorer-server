@@ -1,5 +1,6 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
 import Player from '../models/player-model';
+import Party from '../models/party-model';
 
 export default class PlayerController {
 
@@ -9,6 +10,8 @@ export default class PlayerController {
       const email = Player.emailValidatorAndSanitizer(req.body.email);
       const password = Player.passwordValidatorAndSanitizer(req.body.password);
       let { accessToken, playerData } = await Player.loginPlayer({ email, password });
+      const party = await Party.fetchPartyData(playerData.id);
+      playerData.party = party;
       res.status(200).json({ access_token: accessToken, playerData });
     } catch (err) {
       next(err);
@@ -36,7 +39,8 @@ export default class PlayerController {
     }
   }
 
-  static async fetchUserDataHandler(req: IRequest, res: IResponse, next: INext) {
+  static async fetchPlayerDataHandler(req: IRequest, res: IResponse, next: INext) {
+
     res.status(200).json('from get');
   }
 }
