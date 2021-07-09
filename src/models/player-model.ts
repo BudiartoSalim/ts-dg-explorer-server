@@ -41,6 +41,18 @@ export default class Player {
   // IMPORTANT! reuse utilities when makes sense only!! 
   // use it when the context and requirements is same, eg login and register password should use same hash algorithm
   // we absolutely do not want a utility change for 1 part affects the others, try not change stable ones unless really necessary
+
+  static async getPlayerById(id: string) {
+    const client = await pool.connect();
+    try {
+      return await (await client.query('SELECT * FROM players where id = $1 LIMIT 1;', [id])).rows[0];
+    } catch (err) {
+      throw err;
+    } finally {
+      client.release();
+    }
+  }
+
   static passwordFirstHash(pw: string) {
     const secret = process.env.AUTH_SECRET as string;
     return crypto.createHmac('SHA256', secret).update(pw).digest('hex');
