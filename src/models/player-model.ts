@@ -10,9 +10,8 @@ import { IUnit } from "../interfaces/models/UnitInterfaces";
 
 export default class Player {
   // VALIDATORS AND SANITIZERS SECTION HERE //
-  // this section is primarily for sanitizers and validators
-  // these methods are to be used for Player model, to make sure all fields are uniformly checked
-  // using same logic, to ensure the data to be consistent
+  // this section is primarily for sanitizers and validators for Players model 
+  // to make sure all fields are uniformly checked using same logic, for consistency
   static emailValidatorAndSanitizer(email: string) {
     if (typeof email !== 'string' || validator.isEmpty(email)) { throw "email-empty" };
     if (validator.isEmail(email) === false) { throw "email-invalid-format" };
@@ -63,7 +62,8 @@ export default class Player {
     const playerSession = crypto.createHmac('SHA256', process.env.SES_SECRET as string).update(accessToken).digest('hex');
     await psqlClient.query(
       `UPDATE players
-            SET session = $1
+            SET session = $1,
+                updated_at = NOW()
             WHERE players.id = $2;`,
       [playerSession, id]
     );
@@ -126,7 +126,6 @@ export default class Player {
       const pw = Player.passwordFirstHash(player.password);
       const salt = bcrypt.genSaltSync(12);
       const hashedPassword = bcrypt.hashSync(pw, salt);
-      const currentTime = new Date().toISOString();
 
       // begin transaction
       await client.query('BEGIN;');
@@ -134,16 +133,16 @@ export default class Player {
       const newPlayer = await client.query(
         `INSERT INTO 
         players(name, email, password, money, current_xp, next_xp, rank, rank_cap, created_at, updated_at) 
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) 
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8,NOW(),NOW()) 
         RETURNING *;`,
-        [player.name, player.email, hashedPassword, startingMoney, 0, startingLevelUpReq, startingRank, rankCap, currentTime, currentTime]
+        [player.name, player.email, hashedPassword, startingMoney, 0, startingLevelUpReq, startingRank, rankCap]
       );
 
       const newPlayerParty = await client.query(
         `INSERT INTO 
         parties(player_id, created_at, updated_at) 
-        VALUES ($1,$2,$3) RETURNING *;`,
-        [newPlayer.rows[0].id, currentTime, currentTime]
+        VALUES ($1,NOW(),NOW()) RETURNING *;`,
+        [newPlayer.rows[0].id]
       );
 
       // commit transaction

@@ -39,8 +39,11 @@ export default class PlayerController {
     }
   }
 
+  // Methods below will come from endpoints that goes through auth middleware first
+  // Auth middleware will have req.body.payload containing jwt payload, and req.body.player containing playerdata
+  // GET /players
   static async fetchPlayerDataHandler(req: IRequest, res: IResponse, next: INext) {
 
-    res.status(200).json('from get');
+    res.status(200).json(req.body.player);
   }
 }
