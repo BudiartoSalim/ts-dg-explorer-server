@@ -1,6 +1,8 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
 import Player from '../models/player-model';
 import Party from '../models/party-model';
+import Unit from '../models/unit-model';
+import { IPlayer } from '../interfaces/models/PlayerInterfaces';
 
 export default class PlayerController {
 
@@ -43,7 +45,25 @@ export default class PlayerController {
   // Auth middleware will have req.body.payload containing jwt payload, and req.body.player containing playerdata
   // GET /players
   static async fetchPlayerDataHandler(req: IRequest, res: IResponse, next: INext) {
+    try {
+      let player: IPlayer = {
+        id: req.body.player.id,
+        name: req.body.player.name,
+        money: req.body.player.money,
+        currentXp: req.body.player.current_xp,
+        nextXp: req.body.player.next_xp,
+        rank: req.body.player.rank,
+        rankCap: req.body.player.rank_cap,
+      };
+      let party = await Party.fetchPartyData(player.id);
+      if (typeof party.firstUnit === 'number') { party.firstUnit = await Unit.getUnitById(party.firstUnit) };
+      if (typeof party.secondUnit === 'number') { party.secondUnit = await Unit.getUnitById(party.secondUnit) };
+      if (typeof party.thirdUnit === 'number') { party.thirdUnit = await Unit.getUnitById(party.thirdUnit) };
+      if (typeof party.fourthUnit === 'number') { party.fourthUnit = await Unit.getUnitById(party.fourthUnit) };
 
-    res.status(200).json(req.body.player);
+      res.status(200).json(req.body.player);
+    } catch (err) {
+      next(err);
+    }
   }
 }

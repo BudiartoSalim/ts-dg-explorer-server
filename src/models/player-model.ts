@@ -41,10 +41,20 @@ export default class Player {
   // use it when the context and requirements is same, eg login and register password should use same hash algorithm
   // we absolutely do not want a utility change for 1 part affects the others, try not change stable ones unless really necessary
 
-  static async getPlayerById(id: string) {
+  static async getPlayerById(id: string): Promise<IPlayer> {
     const client = await pool.connect();
     try {
-      return await (await client.query('SELECT * FROM players where id = $1 LIMIT 1;', [id])).rows[0];
+      const playerData = (await client.query('SELECT * FROM players where id = $1 LIMIT 1;', [id])).rows[0];
+      return {
+        id: playerData.id,
+        name: playerData.name,
+        money: playerData.money,
+        currentXp: playerData.current_xp,
+        nextXp: playerData.next_xp,
+        rank: playerData.rank,
+        rankCap: playerData.rank_cap,
+        session: playerData.session
+      }
     } catch (err) {
       throw err;
     } finally {

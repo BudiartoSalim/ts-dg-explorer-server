@@ -12,7 +12,8 @@ Commands:
 - npm start
 
 # TO DO
-- Registration CRUD
+- Registration DONE
+- Auth DONE
 - Seed data
 - Create Characters (purchase random character)
 - Create Party (assign up to 4 characters in party)
