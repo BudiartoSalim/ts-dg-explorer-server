@@ -16,6 +16,16 @@ export default class Unit {
       }
     }
    */
+  static async generateUnit(partyId: number) {
+    const client = await pool.connect();
+    try {
+
+    } catch (err) {
+      throw err;
+    } finally {
+      client.release();
+    }
+  }
 
   static async getUnitByIdAsync(unitId: number) {
     const client = await pool.connect();
