@@ -38,7 +38,7 @@ This repository is for the server part of the project. Client repository will be
 - buy item
 
 # SPECS(?)
-- Refresh token for login sessions
+- Each player now have single session
 - Combat is autocombat 
 - Skill with chances of autotrigger
 - Inventory System
