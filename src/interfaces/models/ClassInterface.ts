@@ -5,6 +5,7 @@ export interface IClass {
   name: string;
   hp_growth: number;
   energy_growth: number;
+  def_growth: number;
   atk_growth: number;
   spd_growth: number;
   hit_growth: number;

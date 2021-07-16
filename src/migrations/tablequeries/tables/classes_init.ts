@@ -3,6 +3,7 @@ export const classes_init =
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   hp_growth INTEGER,
+  def_growth INTEGER,
   energy_growth INTEGER,
   atk_growth INTEGER,
   spd_growth INTEGER,
