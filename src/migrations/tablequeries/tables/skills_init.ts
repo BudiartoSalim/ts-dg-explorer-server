@@ -3,7 +3,7 @@
 // skills.effect_power will be used to adjust the skill's power
 export const skills_init =
   `CREATE TABLE IF NOT EXISTS "skills"(
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name VARCHAR(255),
     description TEXT,
     type VARCHAR(255),

@@ -3,7 +3,7 @@
 // base_power decides the power
 export const status_effects_init =
   `CREATE TABLE IF NOT EXISTS "status_effects"(
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name VARCHAR(255),
     description TEXT,
     type VARCHAR(255),
