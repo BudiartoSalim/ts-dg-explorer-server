@@ -11,6 +11,7 @@ export const items_init =
     effect_power INTEGER,
     base_price INTEGER,
     equip_stat_hp INTEGER,
+    equip_stat_def INTEGER,
     equip_stat_atk INTEGER,
     equip_stat_spd INTEGER,
     equip_stat_hit INTEGER,

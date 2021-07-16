@@ -5,6 +5,7 @@ export const status_effects_init =
   `CREATE TABLE IF NOT EXISTS "status_effects"(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
+    description TEXT,
     type VARCHAR(255),
     effect_type VARCHAR(255),
     base_duration VARCHAR(255),

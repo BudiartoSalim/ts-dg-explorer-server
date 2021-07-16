@@ -8,6 +8,7 @@
     "base_price": 100,
     "equip_stat_hp": 0,
     "equip_stat_atk": 0,
+    "equip_stat_def": 0,
     "equip_stat_spd": 0,
     "equip_stat_hit": 0
   },
@@ -20,6 +21,7 @@
     "base_price": 1000,
     "equip_stat_hp": 0,
     "equip_stat_atk": 50,
+    "equip_stat_def": 0,
     "equip_stat_spd": 0,
     "equip_stat_hit": 0
   },
@@ -30,8 +32,9 @@
     "effect": "",
     "effect_power": 0,
     "base_price": 300,
-    "equip_stat_hp": 50,
+    "equip_stat_hp": 0,
     "equip_stat_atk": 0,
+    "equip_stat_def": 10,
     "equip_stat_spd": 0,
     "equip_stat_hit": 0
   },
@@ -43,7 +46,8 @@
     "effect_power": 0,
     "base_price": 150,
     "equip_stat_hp": 10,
-    "equip_stat_atk": 0,
+    "equip_stat_atk": 1,
+    "equip_stat_def": 1,
     "equip_stat_spd": 0,
     "equip_stat_hit": 0
   }

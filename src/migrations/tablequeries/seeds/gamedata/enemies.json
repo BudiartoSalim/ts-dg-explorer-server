@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Rabid Rabbit",
+    "description": "A wild rabbit with sharp fangs that are particularly aggresive. Unlike normal rabbits, this kind of rabbit is carnivorous and will attack any people that comes within its sight.",
+    "type": "consumable",
+    "effect": "heal_flat",
+    "effect_power": 500,
+    "base_price": 100,
+    "equip_stat_hp": 0,
+    "equip_stat_atk": 0,
+    "equip_stat_spd": 0,
+    "equip_stat_hit": 0
+  }
+]

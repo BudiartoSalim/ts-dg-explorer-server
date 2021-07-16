@@ -56,6 +56,7 @@ export default class Unit {
         maxEnergy: unitData.max_energy,
         currentEnergy: unitData.current_energy,
         baseAtk: unitData.base_atk,
+        baseDef: unitData.base_def,
         baseSpd: unitData.base_spd,
         baseHit: unitData.base_hit,
         equips: unitData.equip_id,

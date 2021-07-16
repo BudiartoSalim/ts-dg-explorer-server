@@ -15,6 +15,7 @@ export interface IUnit {
   maxEnergy: number;
   currentEnergy: number;
   baseAtk: number;
+  baseDef: number;
   baseSpd: number;
   baseHit: number;
   equips: {

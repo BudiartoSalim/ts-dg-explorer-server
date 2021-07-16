@@ -5,7 +5,7 @@ export const skills_init =
   `CREATE TABLE IF NOT EXISTS "skills"(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    description VARCHAR(255),
+    description TEXT,
     type VARCHAR(255),
     effect VARCHAR(255),
     effect_power VARCHAR(255),

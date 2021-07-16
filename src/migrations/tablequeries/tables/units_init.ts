@@ -13,6 +13,7 @@ export const units_init =
     max_energy INTEGER,
     current_energy INTEGER,
     base_atk INTEGER,
+    base_def INTEGER,
     base_spd INTEGER,
     base_hit INTEGER,
     class_id INTEGER,
