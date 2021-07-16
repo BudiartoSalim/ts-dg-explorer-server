@@ -1,7 +1,7 @@
 
 export const enemies_init =
   `CREATE TABLE IF NOT EXISTS "enemies"(
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name VARCHAR(255),
     description TEXT,
     level INTEGER,

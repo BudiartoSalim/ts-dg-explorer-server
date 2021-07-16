@@ -1,6 +1,6 @@
 export const areas_init =
   `CREATE TABLE IF NOT EXISTS "areas" (
-  id SERIAL PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
   base_level INTEGER,
