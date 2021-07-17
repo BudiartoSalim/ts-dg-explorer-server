@@ -1,0 +1,20 @@
+[
+  {
+    "id": 10000001,
+    "name": "Smack",
+    "description": "Smack the opponent with whatever on your hand (or with your hand) dealing small damage. Does this even qualify as a skill?",
+    "type": "Active/Attack",
+    "effect": "FixedDamage/SingleTarget",
+    "effect_power": 10,
+    "cost": 0
+  },
+  {
+    "id": 10000002,
+    "name": "Magic Arrow",
+    "description": "The most basic magic attack. Sends a magic power",
+    "type": "Active/Attack",
+    "effect": "AtkPercentageDamage/SingleTarget",
+    "effect_power": 1100,
+    "cost": 10
+  }
+]
