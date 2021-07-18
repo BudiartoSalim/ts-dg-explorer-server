@@ -8,7 +8,8 @@
     "dev": "nodemon src/app.ts",
     "build": "tsc -p .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devmigrate": "ts-node src/migrations/migration.ts"
+    "devmigrate": "ts-node src/migrations/migration.ts",
+    "devseed": "ts-node src/migrations/seederscript.ts"
   },
   "repository": {
     "type": "git",

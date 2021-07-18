@@ -1,12 +1,12 @@
-import { IPlayer, IPlayerCreds } from "../interfaces/models/PlayerInterfaces";
+import { IPlayer, IPlayerCreds } from "../interfaces/definedmodels/PlayerInterfaces";
 import pool from "../dbconfig/postgres";
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 import { PoolClient } from "pg";
-import { IParty } from "../interfaces/models/PartyInterfaces";
-import { IUnit } from "../interfaces/models/UnitInterfaces";
+import { IParty } from "../interfaces/definedmodels/PartyInterfaces";
+import { IUnit } from "../interfaces/definedmodels/UnitInterfaces";
 
 export default class Player {
   // VALIDATORS AND SANITIZERS SECTION HERE //

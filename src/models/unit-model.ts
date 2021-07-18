@@ -1,6 +1,6 @@
-import { IUnit } from "../interfaces/models/UnitInterfaces";
+import { IUnit } from "../interfaces/definedmodels/UnitInterfaces";
 import pool from "../dbconfig/postgres";
-import { IParty } from "../interfaces/models/PartyInterfaces";
+import { IParty } from "../interfaces/definedmodels/PartyInterfaces";
 
 export default class Unit {
 
