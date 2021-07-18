@@ -2,7 +2,7 @@ import { IRequest, IResponse, INext } from '../interfaces/express';
 import Player from '../models/player-model';
 import Party from '../models/party-model';
 import Unit from '../models/unit-model';
-import { IPlayer } from '../interfaces/models/PlayerInterfaces';
+import { IPlayer } from '../interfaces/definedmodels/PlayerInterfaces';
 
 export default class PlayerController {
 
