@@ -4,8 +4,8 @@ export interface ISkills {
   description: string;
   type: string;
   effect: string;
-  effect_power: number;
+  effectPower: number;
   cost: number;
-  created_at?: Date;
-  updated_at?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
