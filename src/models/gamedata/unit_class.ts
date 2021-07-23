@@ -29,7 +29,7 @@ export default class UnitClass {
       const queryResult = await client.query(
         `INSERT INTO 
           classes(id, name, hp_growth, energy_growth, atk_growth, def_growth, spd_growth, hit_growth, created_at, updated_at)
-          VALUES($1,$2,$3,$4,$5,$6,$7,$8. NOW(), NOW())
+          VALUES($1,$2,$3,$4,$5,$6,$7,$8, NOW(), NOW())
           RETURNING *;
           `,
         [unitclass.id, unitclass.name, unitclass.hpGrowth, unitclass.energyGrowth,
