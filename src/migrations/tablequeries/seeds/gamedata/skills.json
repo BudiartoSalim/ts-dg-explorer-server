@@ -11,10 +11,19 @@
   {
     "id": 10000002,
     "name": "Magic Arrow",
-    "description": "The most basic magic attack. Sends a magic power",
+    "description": "The most basic magic attack. Sends a magic power.",
+    "type": "Active/Attack",
+    "effect": "AtkPercentageDamage/SingleTarget",
+    "effect_power": 1200,
+    "cost": 10
+  },
+  {
+    "id": 10000003,
+    "name": "Bite",
+    "description": "Literally biting the enemy.",
     "type": "Active/Attack",
     "effect": "AtkPercentageDamage/SingleTarget",
     "effect_power": 1100,
-    "cost": 10
+    "cost": 5
   }
 ]
