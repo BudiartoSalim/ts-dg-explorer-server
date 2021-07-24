@@ -1,17 +1,19 @@
-[
+import { IItem } from "../../../interfaces/definedmodels/ItemInterface"
+const seedItems: IItem[] = [
   {
     "id": 10000001,
     "name": "Potion",
     "description": "Heals HP+500. Standard potion that heals your wounds. Although basic and does not heal much, the quality is consistent and the production processes are highly professional and standardized, making it very affordable and abundant in supply.",
     "type": "consumable",
     "effect": "heal_flat",
-    "effect_power": 500,
-    "base_price": 100,
-    "equip_stat_hp": 0,
-    "equip_stat_atk": 0,
-    "equip_stat_def": 0,
-    "equip_stat_spd": 0,
-    "equip_stat_hit": 0
+    "effectPower": 500,
+    "basePrice": 100,
+    "equipStatHp": 0,
+    "equipStatEnergy": 0,
+    "equipStatAtk": 0,
+    "equipStatDef": 0,
+    "equipStatSpd": 0,
+    "equipStatHit": 0
   },
   {
     "id": 20000001,
@@ -19,13 +21,14 @@
     "description": "ATK+50. Basic mass-produced shortsword. Effective enough for common uses, having higher reach than knives while still relatively light for newbies and sturdy enough to last few rough combats makes it the common go-to weapon for new adventurers and army recruits alike.",
     "type": "weapon",
     "effect": "",
-    "effect_power": 0,
-    "base_price": 1000,
-    "equip_stat_hp": 0,
-    "equip_stat_atk": 50,
-    "equip_stat_def": 0,
-    "equip_stat_spd": 0,
-    "equip_stat_hit": 0
+    "effectPower": 0,
+    "basePrice": 1000,
+    "equipStatHp": 0,
+    "equipStatEnergy": 0,
+    "equipStatAtk": 50,
+    "equipStatDef": 0,
+    "equipStatSpd": 0,
+    "equipStatHit": 0
   },
   {
     "id": 30000001,
@@ -33,13 +36,14 @@
     "description": "Max HP+50. Just a normal shirt, does not offer much protection.",
     "type": "armor",
     "effect": "",
-    "effect_power": 0,
-    "base_price": 300,
-    "equip_stat_hp": 0,
-    "equip_stat_atk": 0,
-    "equip_stat_def": 10,
-    "equip_stat_spd": 0,
-    "equip_stat_hit": 0
+    "effectPower": 0,
+    "basePrice": 300,
+    "equipStatHp": 0,
+    "equipStatEnergy": 0,
+    "equipStatAtk": 0,
+    "equipStatDef": 10,
+    "equipStatSpd": 0,
+    "equipStatHit": 0
   },
   {
     "id": 40000001,
@@ -47,13 +51,14 @@
     "description": "Max HP+10. Ring made out of iron, usually created using leftover iron scraps from other stuffs. It's really nothing special.",
     "type": "accessory",
     "effect": "",
-    "effect_power": 0,
-    "base_price": 150,
-    "equip_stat_hp": 10,
-    "equip_stat_atk": 1,
-    "equip_stat_def": 1,
-    "equip_stat_spd": 0,
-    "equip_stat_hit": 0
+    "effectPower": 0,
+    "basePrice": 150,
+    "equipStatHp": 10,
+    "equipStatEnergy": 0,
+    "equipStatAtk": 1,
+    "equipStatDef": 1,
+    "equipStatSpd": 0,
+    "equipStatHit": 0
   },
   {
     "id": 40000002,
@@ -61,13 +66,14 @@
     "description": "ATK+10. This ring is enchanted with magic power that makes the user abit more powerful. That or the user feels that way because they believe this ring makes them more powerful.",
     "type": "accessory",
     "effect": "",
-    "effect_power": 0,
-    "base_price": 1000,
-    "equip_stat_hp": 0,
-    "equip_stat_atk": 10,
-    "equip_stat_def": 0,
-    "equip_stat_spd": 0,
-    "equip_stat_hit": 0
+    "effectPower": 0,
+    "basePrice": 1000,
+    "equipStatHp": 0,
+    "equipStatEnergy": 0,
+    "equipStatAtk": 10,
+    "equipStatDef": 0,
+    "equipStatSpd": 0,
+    "equipStatHit": 0
   },
   {
     "id": 50000001,
@@ -75,12 +81,15 @@
     "description": "Just a regular rock. Pretty worthless but getting hit by one sure hurts. Some craftsman might actually buy it as material to craft cheap items but mainly because they'd rather spend tiny amount of money to buy it rather than wasting time gathering it themselves.",
     "type": "etc",
     "effect": "",
-    "effect_power": 0,
-    "base_price": 10,
-    "equip_stat_hp": 0,
-    "equip_stat_atk": 0,
-    "equip_stat_def": 0,
-    "equip_stat_spd": 0,
-    "equip_stat_hit": 0
+    "effectPower": 0,
+    "basePrice": 10,
+    "equipStatHp": 0,
+    "equipStatEnergy": 0,
+    "equipStatAtk": 0,
+    "equipStatDef": 0,
+    "equipStatSpd": 0,
+    "equipStatHit": 0
   }
 ]
+
+export default seedItems;
