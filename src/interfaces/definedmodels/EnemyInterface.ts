@@ -1,6 +1,5 @@
-import { IClass } from "./ClassInterface";
-import { IItem } from "./ItemInterface";
 import { ISkills } from "./SkillsInterface";
+import { IDrops } from "./DropsInterface";
 export interface IEnemy {
   id?: number;
   name: string;
@@ -16,6 +15,7 @@ export interface IEnemy {
   baseSpd: number;
   baseHit: number;
   skill: ISkills | number | null;
+  drops?: IDrops[] | null;
   createdAt?: Date;
   updatedAt?: Date;
 }
