@@ -5,8 +5,6 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 import { PoolClient } from "pg";
-import { IParty } from "../interfaces/definedmodels/PartyInterfaces";
-import { IUnit } from "../interfaces/definedmodels/UnitInterfaces";
 
 export default class Player {
   // VALIDATORS AND SANITIZERS SECTION HERE //
@@ -53,6 +51,7 @@ export default class Player {
         nextXp: playerData.next_xp,
         rank: playerData.rank,
         rankCap: playerData.rank_cap,
+        party: playerData.party_id,
         session: playerData.session
       }
     } catch (err) {
@@ -110,6 +109,7 @@ export default class Player {
               nextXp: playerData.next_xp,
               rank: playerData.rank,
               rankCap: playerData.rank_cap,
+              party: playerData.party_id
             }
           };
         }

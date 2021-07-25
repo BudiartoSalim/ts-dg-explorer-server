@@ -1,6 +1,6 @@
 import { IItem } from "./ItemInterface";
 export interface IInventory {
-  item: IItem;
+  item: IItem | number;
   quantity: number;
   createdAt?: Date;
   updatedAt?: Date;

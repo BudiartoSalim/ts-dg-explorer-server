@@ -17,7 +17,7 @@ export interface IPlayer {
   nextXp: number;
   rank: number;
   rankCap: number;
-  party?: IParty;
+  party: IParty | number;
   inventory?: IInventory[];
   session?: string;
   createdAt?: Date;
