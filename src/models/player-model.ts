@@ -51,7 +51,6 @@ export default class Player {
         nextXp: playerData.next_xp,
         rank: playerData.rank,
         rankCap: playerData.rank_cap,
-        party: playerData.party_id,
         session: playerData.session
       }
     } catch (err) {
@@ -108,8 +107,7 @@ export default class Player {
               currentXp: playerData.current_xp,
               nextXp: playerData.next_xp,
               rank: playerData.rank,
-              rankCap: playerData.rank_cap,
-              party: playerData.party_id
+              rankCap: playerData.rank_cap
             }
           };
         }
