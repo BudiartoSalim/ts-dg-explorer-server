@@ -56,10 +56,10 @@ export default class PlayerController {
         rankCap: req.body.player.rank_cap,
       };
       let party = await Party.fetchPartyData(player.id);
-      if (typeof party.firstUnit === 'number') { party.firstUnit = await Unit.getUnitById(party.firstUnit) };
-      if (typeof party.secondUnit === 'number') { party.secondUnit = await Unit.getUnitById(party.secondUnit) };
-      if (typeof party.thirdUnit === 'number') { party.thirdUnit = await Unit.getUnitById(party.thirdUnit) };
-      if (typeof party.fourthUnit === 'number') { party.fourthUnit = await Unit.getUnitById(party.fourthUnit) };
+      if (typeof party.unit0 === 'number') { party.unit0 = await Unit.getUnitById(party.unit0) };
+      if (typeof party.unit1 === 'number') { party.unit1 = await Unit.getUnitById(party.unit1) };
+      if (typeof party.unit2 === 'number') { party.unit2 = await Unit.getUnitById(party.unit2) };
+      if (typeof party.unit3 === 'number') { party.unit3 = await Unit.getUnitById(party.unit3) };
 
       res.status(200).json(req.body.player);
     } catch (err) {
