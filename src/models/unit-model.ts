@@ -16,9 +16,46 @@ export default class Unit {
       }
     }
    */
-  static async generateUnit(partyId: number) {
+  static async generateUnit(classId: number): Promise<IUnit> {
     const client = await pool.connect();
     try {
+      let remainingInitialStatBonus = 5000;
+
+      // index 0 - 4 = stat following the name of the variables in order.
+      // ordered using array to make the code more concise and less repetitive, to make sure 
+      // the order is correct for the product design/balance reason.
+      let InitialHpEnergyHitSpdDefAtk = [0, 0, 0, 0, 0, 0].map((e) => {
+        e = Math.floor(Math.random()) * remainingInitialStatBonus;
+        remainingInitialStatBonus -= e;
+        return e;
+      });
+
+      let gender = 'female';
+      if (remainingInitialStatBonus % 2 === 0) {
+        gender = 'male';
+      }
+
+
+      // maybe refactor to send a jwt of IUnit?
+      // this is so user cannot cheat by sending their dream unit with POST requests
+      return {
+        name: 'Will Randomz',
+        gender,
+        class: classId,
+        equips: -1,
+        level: 1,
+        levelCap: 99,
+        currentXp: 0,
+        nextXp: 100,
+        maxHp: InitialHpEnergyHitSpdDefAtk[0],
+        currentHp: InitialHpEnergyHitSpdDefAtk[0],
+        maxEnergy: InitialHpEnergyHitSpdDefAtk[1],
+        currentEnergy: InitialHpEnergyHitSpdDefAtk[1],
+        baseAtk: InitialHpEnergyHitSpdDefAtk[5],
+        baseDef: InitialHpEnergyHitSpdDefAtk[4],
+        baseSpd: InitialHpEnergyHitSpdDefAtk[3],
+        baseHit: InitialHpEnergyHitSpdDefAtk[2]
+      }
 
     } catch (err) {
       throw err;
