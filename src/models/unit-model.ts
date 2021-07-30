@@ -1,6 +1,7 @@
 import { IUnit } from "../interfaces/definedmodels/UnitInterfaces";
 import pool from "../dbconfig/postgres";
 import { IParty } from "../interfaces/definedmodels/PartyInterfaces";
+import jwt from 'jsonwebtoken';
 
 export default class Unit {
 
@@ -16,7 +17,7 @@ export default class Unit {
       }
     }
    */
-  static async generateUnit(classId: number): Promise<IUnit> {
+  static async generateUnit(classId: number): Promise<string> {
     const client = await pool.connect();
     try {
       let remainingInitialStatBonus = 5000;
@@ -35,10 +36,8 @@ export default class Unit {
         gender = 'male';
       }
 
-
-      // maybe refactor to send a jwt of IUnit?
       // this is so user cannot cheat by sending their dream unit with POST requests
-      return {
+      const newUnit: IUnit = {
         name: 'Will Randomz',
         gender,
         class: classId,
@@ -56,7 +55,8 @@ export default class Unit {
         baseSpd: InitialHpEnergyHitSpdDefAtk[3],
         baseHit: InitialHpEnergyHitSpdDefAtk[2]
       }
-
+      const newUnitToken = jwt.sign(newUnit, process.env.UNIT_SECRET as string, { expiresIn: '1h' });
+      return newUnitToken;
     } catch (err) {
       throw err;
     } finally {
