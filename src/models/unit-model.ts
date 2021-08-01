@@ -1,6 +1,5 @@
 import { IUnit } from "../interfaces/definedmodels/UnitInterfaces";
 import pool from "../dbconfig/postgres";
-import { IParty } from "../interfaces/definedmodels/PartyInterfaces";
 import jwt from 'jsonwebtoken';
 
 export default class Unit {
@@ -17,12 +16,34 @@ export default class Unit {
       }
     }
    */
+
+  static async decodeUnitJwt(unitJwt: string): Promise<IUnit> {
+    try {
+      const payload = jwt.verify(unitJwt, process.env.UNIT_SECRET as string);
+
+      return payload as IUnit;
+    } catch (err) {
+      throw 'invalid-unit-token';
+    }
+  }
+
+  static async hireUnit(playerId: number, unit: IUnit) {
+    const client = await pool.connect();
+    try {
+
+    } catch (err) {
+      throw err;
+    } finally {
+      client.release();
+    }
+  }
+
   static async generateUnit(classId: number): Promise<string> {
     const client = await pool.connect();
     try {
       let remainingInitialStatBonus = 5000;
 
-      // index 0 - 4 = stat following the name of the variables in order.
+      // index 0 - 5 = stat following the name of the variables in order.
       // ordered using array to make the code more concise and less repetitive, to make sure 
       // the order is correct for the product design/balance reason.
       let InitialHpEnergyHitSpdDefAtk = [0, 0, 0, 0, 0, 0].map((e) => {
