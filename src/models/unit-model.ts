@@ -17,8 +17,25 @@ export default class Unit {
     }
    */
 
-  static async hireUnit(playerId: number, unitJwt: string) {
+  static async decodeUnitJwt(unitJwt: string): Promise<IUnit> {
+    try {
+      const payload = jwt.verify(unitJwt, process.env.UNIT_SECRET as string);
 
+      return payload as IUnit;
+    } catch (err) {
+      throw 'invalid-unit-token';
+    }
+  }
+
+  static async hireUnit(playerId: number, unit: IUnit) {
+    const client = await pool.connect();
+    try {
+
+    } catch (err) {
+      throw err;
+    } finally {
+      client.release();
+    }
   }
 
   static async generateUnit(classId: number): Promise<string> {
