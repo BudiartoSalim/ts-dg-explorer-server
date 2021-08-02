@@ -1,6 +1,7 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
 import Unit from '../models/unit-model';
 import { IPlayer } from '../interfaces/definedmodels/PlayerInterfaces';
+import playerParser from '../helpers/player-parser';
 
 export default class UnitController {
   // POST /units
@@ -17,6 +18,7 @@ export default class UnitController {
   // POST /units/hire
   static async hireUnitHandler(req: IRequest, res: IResponse, next: INext) {
     try {
+      const player = playerParser(req.body.player);
 
     } catch (err) {
       next(err);

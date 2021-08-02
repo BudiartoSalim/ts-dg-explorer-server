@@ -19,7 +19,9 @@ function errorDef(err: string | unknown): IError {
     'password-invalid-length': { status: 400, message: "Password must be at least 6 characters long." },
     'email-already-exists': { status: 400, message: "Email already used." },
     'wrong-password': { status: 400, message: "Email/Password is incorrect." },
-    'unauthorized': { status: 401, message: "Unauthorized." }
+    'unauthorized': { status: 401, message: "Unauthorized." },
+    'player-parse-error': { status: 401, message: "Authorization Error." },
+    'invalid-unit-token': { status: 400, message: "Selected unit cannot be hired anymore." }
   }
 
   if (typeof err === 'string' && errors[err]) { return errors[err]; };
