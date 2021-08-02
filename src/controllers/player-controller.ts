@@ -3,6 +3,7 @@ import Player from '../models/player-model';
 import Party from '../models/party-model';
 import Unit from '../models/unit-model';
 import { IPlayer } from '../interfaces/definedmodels/PlayerInterfaces';
+import playerParser from '../helpers/player-parser';
 
 export default class PlayerController {
 
@@ -46,15 +47,7 @@ export default class PlayerController {
   // GET /players
   static async fetchPlayerDataHandler(req: IRequest, res: IResponse, next: INext) {
     try {
-      let player: IPlayer = {
-        id: req.body.player.id,
-        name: req.body.player.name,
-        money: req.body.player.money,
-        currentXp: req.body.player.current_xp,
-        nextXp: req.body.player.next_xp,
-        rank: req.body.player.rank,
-        rankCap: req.body.player.rank_cap,
-      };
+      const player = playerParser(req.body.player);
       let party = await Party.fetchPartyData(player.id);
       if (typeof party.unit0 === 'number') { party.unit0 = await Unit.getUnitById(party.unit0) };
       if (typeof party.unit1 === 'number') { party.unit1 = await Unit.getUnitById(party.unit1) };
