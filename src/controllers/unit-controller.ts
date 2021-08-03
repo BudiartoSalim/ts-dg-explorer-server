@@ -1,5 +1,6 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
 import Unit from '../models/unit-model';
+import Party from '../models/party-model';
 import { IPlayer } from '../interfaces/definedmodels/PlayerInterfaces';
 import playerParser from '../helpers/player-parser';
 
@@ -19,7 +20,9 @@ export default class UnitController {
   static async hireUnitHandler(req: IRequest, res: IResponse, next: INext) {
     try {
       const player = playerParser(req.body.player);
-
+      const unitToBeAdded = await Unit.decodeUnitJwt(req.body.unitToken as string);
+      const hireUnitResult = await Unit.hireUnit(player.id, unitToBeAdded);
+      res.status(201).json({ message: `Successfully hired ${hireUnitResult.name}!`, unit: hireUnitResult });
     } catch (err) {
       next(err);
     }
