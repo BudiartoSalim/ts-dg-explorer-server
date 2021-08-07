@@ -12,10 +12,12 @@ async function migrateTables() {
     // firstQueries had to be executed first
     const firstQueries = tableQueries.map((e) => { return client.query(e) });
     await Promise.all(firstQueries);
+    console.log('first queries finished');
 
     // secondQueries are queries for tables and constraints that are dependent to firstQueries
     const secondQueries = fkQueries.map((e) => { return client.query(e) });
     await Promise.all(secondQueries);
+    console.log('second queries finished');
 
     console.log("migration success");
 

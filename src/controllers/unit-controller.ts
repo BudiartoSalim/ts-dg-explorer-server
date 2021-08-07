@@ -1,7 +1,5 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
 import Unit from '../models/unit-model';
-import Party from '../models/party-model';
-import { IPlayer } from '../interfaces/definedmodels/PlayerInterfaces';
 import playerParser from '../helpers/player-parser';
 
 export default class UnitController {
