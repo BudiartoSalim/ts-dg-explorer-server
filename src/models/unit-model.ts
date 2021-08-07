@@ -32,16 +32,16 @@ export default class Unit {
       await client.query('BEGIN;');
       const insertEquipSheetQueryResult = await client.query(
         `INSERT INTO equips
-          (first_skill_id, second_skill_id, main_weapon_id, sub_weapon_id, armor_id, accessory_id,
-          first_consumable_id, second_consumable_id, created_at, updated_at)
+          (first_skill_id, second_skill_id, main_weapon_item_id, sub_weapon_item_id, armor_item_id, accessory_item_id,
+          first_consumable_item_id, second_consumable_item_id, created_at, updated_at)
         VALUES(null, null, null, null, null, null, null, null, NOW(), NOW())
         RETURNING *;`
       );
       const newUnitEquipSheet = insertEquipSheetQueryResult.rows[0];
 
       const insertUnitQueryResult = await client.query(
-        `INSERT INTO 
-        units(player_id, name, gender, level, level_cap, current_xp, next_xp, max_hp, current_hp,
+        `INSERT INTO units
+          (player_id, name, gender, level, level_cap, current_xp, next_xp, max_hp, current_hp,
           max_energy, current_energy, base_atk, base_def, base_spd, base_hit, class_id, equip_id, created_at, updated_at) 
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17, NOW(), NOW())
         RETURNING *;

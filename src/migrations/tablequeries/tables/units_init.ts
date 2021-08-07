@@ -2,6 +2,7 @@
 export const units_init =
   `CREATE TABLE IF NOT EXISTS "units"(
     id SERIAL PRIMARY KEY,
+    player_id INTEGER,
     name VARCHAR(255),
     gender VARCHAR(6),
     level INTEGER,

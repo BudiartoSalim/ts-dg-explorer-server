@@ -1,4 +1,6 @@
 import { ErrorRequestHandler, Response } from 'express';
+import { writeFileSync } from 'fs';
+import fs from 'fs';
 
 interface IError {
   status: number;
@@ -33,6 +35,7 @@ function unhandledError(err: IError, res: Response) {
   //apply logger logic here to log unhandled error
   //this function just passes the detail for simplicity, for now
   //should avoid passing raw error info in response and logs it instead
+  fs.writeFileSync(`./error_logs/logs_${Date.now()}.json`, JSON.stringify(err, null, 2));
   res.status(err.status).json({ errorMessage: err.message, detail: err.unhandledError });
 }
 
