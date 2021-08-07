@@ -92,7 +92,7 @@ export default class Unit {
       // ordered using array to make the code more concise and less repetitive, to make sure 
       // the order is correct for the product design/balance reason.
       let InitialHpEnergyHitSpdDefAtk = [0, 0, 0, 0, 0, 0].map((e) => {
-        e = Math.floor(Math.random()) * remainingInitialStatBonus;
+        e += Math.floor(Math.random() * remainingInitialStatBonus);
         remainingInitialStatBonus -= e;
         return e;
       });
@@ -100,7 +100,12 @@ export default class Unit {
       let gender = 'female';
       if (remainingInitialStatBonus % 2 === 0) {
         gender = 'male';
-      }
+      };
+
+      if (!classId) {
+        classId = Math.ceil(Math.random());
+      };
+
 
       // this is so user cannot cheat by sending their dream unit with POST requests
       const newUnit: IUnit = {
@@ -121,6 +126,7 @@ export default class Unit {
         baseSpd: InitialHpEnergyHitSpdDefAtk[3],
         baseHit: InitialHpEnergyHitSpdDefAtk[2]
       }
+
       const newUnitToken = jwt.sign(newUnit, process.env.UNIT_SECRET as string, { expiresIn: '1h' });
       return newUnitToken;
     } catch (err) {
