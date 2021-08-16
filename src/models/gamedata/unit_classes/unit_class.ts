@@ -1,5 +1,5 @@
-import pool from "../../dbconfig/postgres";
-import { IClass } from "../../interfaces/definedmodels/ClassInterface";
+import pool from "../../../dbconfig/postgres";
+import { IClass } from "../../../interfaces/definedmodels/ClassInterface";
 
 export default class UnitClass {
   static async addClassesToDBAsync(unitClasses: IClass[]) {
