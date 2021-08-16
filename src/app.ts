@@ -4,6 +4,7 @@ import router from './routes';
 import cors from 'cors';
 import errorHandler from './middlewares/error-handler';
 
+
 const app = express();
 const PORT: number = Number(process.env.PORT) || 4000;
 
