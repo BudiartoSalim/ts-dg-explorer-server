@@ -56,4 +56,26 @@ export default class UnitClass {
     }
   }
 
+  static async get(id: number): Promise<IClass> {
+    const client = await pool.connect();
+    try {
+      const { rows } = await client.query(`SELECT * FROM classes WHERE classes.id = $1 LIMIT 1;`, [id]);
+      const fetchedClass = rows[0];
+      return {
+        id: fetchedClass.id,
+        name: fetchedClass.name,
+        hpGrowth: fetchedClass.hp_growth,
+        energyGrowth: fetchedClass.energy_growth,
+        atkGrowth: fetchedClass.atk_growth,
+        defGrowth: fetchedClass.def_growth,
+        spdGrowth: fetchedClass.spd_growth,
+        hitGrowth: fetchedClass.hit_growth
+      };
+    } catch (err) {
+      throw err;
+    } finally {
+      client.release();
+    }
+  }
+
 }

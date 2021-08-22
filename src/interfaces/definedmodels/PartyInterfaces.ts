@@ -1,6 +1,6 @@
 import { IUnit } from "./UnitInterfaces";
 export interface IParty {
-  id: number;
+  id?: number;
   playerId?: number;
   unit0: IUnit | null | number;
   unit1: IUnit | null | number;

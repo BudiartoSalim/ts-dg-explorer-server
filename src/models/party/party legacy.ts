@@ -1,5 +1,5 @@
-import pool from "../dbconfig/postgres";
-import { IParty } from "../interfaces/definedmodels/PartyInterfaces";
+import pool from "../../dbconfig/postgres";
+import { IParty } from "../../interfaces/definedmodels/PartyInterfaces";
 
 export default class Party {
   static async fetchPartyData(playerId: number): Promise<IParty> {

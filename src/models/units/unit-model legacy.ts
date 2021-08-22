@@ -1,9 +1,8 @@
-import { IUnit } from "../interfaces/definedmodels/UnitInterfaces";
-import pool from "../dbconfig/postgres";
+import { IUnit } from "../../interfaces/definedmodels/UnitInterfaces";
+import pool from "../../dbconfig/postgres";
 import jwt from 'jsonwebtoken';
 
 export default class Unit {
-
   /*  
     static async boilerPlate() {
       const client = await pool.connect();

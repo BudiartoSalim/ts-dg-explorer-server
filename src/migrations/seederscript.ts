@@ -1,9 +1,9 @@
 if (process.env.NODE_ENV !== 'production') { require('dotenv').config() };
-import Player from "../models/player-model";
+import Player from "../models/player";
 import Item from '../models/gamedata/item';
 import Skill from "../models/gamedata/skill";
-import UnitClass from "../models/gamedata/unit_classes/unit_class";
-import Enemy from "../models/gamedata/enemies";
+import UnitClass from "../models/gamedata/unit_classes/unit-class";
+import Enemy from "../models/gamedata/enemy";
 
 //seeds
 import seeds from './seeds/gamedata';

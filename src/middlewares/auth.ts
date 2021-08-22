@@ -1,7 +1,7 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import Player from '../models/player-model';
+import Player from '../models/player';
 
 async function authenticationMiddleware(req: IRequest, res: IResponse, next: INext) {
   try {
