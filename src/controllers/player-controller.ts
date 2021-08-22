@@ -1,7 +1,7 @@
 import { IRequest, IResponse, INext } from '../interfaces/express';
-import Player from '../models/player-model';
-import Party from '../models/party-model';
-import Unit from '../models/unit-model';
+import Player from '../models/player';
+import Party from '../models/party/party';
+import Unit from '../models/units/unit';
 import { IPlayer } from '../interfaces/definedmodels/PlayerInterfaces';
 import playerParser from '../helpers/player-parser';
 
@@ -13,7 +13,8 @@ export default class PlayerController {
       const email = Player.emailValidatorAndSanitizer(req.body.email);
       const password = Player.passwordValidatorAndSanitizer(req.body.password);
       let { accessToken, playerData } = await Player.loginPlayer({ email, password });
-      const party = await Party.fetchPartyData(playerData.id);
+
+      const party = await new Party(playerData.id).fetchPartyData();
       playerData.party = party;
       res.status(200).json({ access_token: accessToken, playerData });
     } catch (err) {
@@ -24,17 +25,15 @@ export default class PlayerController {
   // POST /players/register
   static async registerUserHandler(req: IRequest, res: IResponse, next: INext) {
     try {
-      req.body.email = Player.emailValidatorAndSanitizer(req.body.email);
-      req.body.password = Player.passwordValidatorAndSanitizer(req.body.password);
-      req.body.name = Player.nameValidatorAndSanitizer(req.body.name);
+      const email = Player.emailValidatorAndSanitizer(req.body.email) as string;
+      const password = Player.passwordValidatorAndSanitizer(req.body.password);
+      const name = Player.nameValidatorAndSanitizer(req.body.name);
 
-      const newPlayer = await Player.registerPlayer({
-        email: req.body.email,
-        name: req.body.name,
-        password: req.body.password
+      const newPlayer: IPlayer = await Player.registerPlayer({
+        email,
+        name,
+        password
       });
-
-
 
       res.status(200).json(newPlayer);
     } catch (err) {
@@ -47,8 +46,8 @@ export default class PlayerController {
   // GET /players
   static async fetchPlayerDataHandler(req: IRequest, res: IResponse, next: INext) {
     try {
-      const player = playerParser(req.body.player);
-      let party = await Party.fetchPartyData(player.id);
+      const player: IPlayer = playerParser(req.body.player);
+      let party = await new Party(player.id).fetchPartyData();
       if (typeof party.unit0 === 'number') { party.unit0 = await Unit.getUnitById(party.unit0) };
       if (typeof party.unit1 === 'number') { party.unit1 = await Unit.getUnitById(party.unit1) };
       if (typeof party.unit2 === 'number') { party.unit2 = await Unit.getUnitById(party.unit2) };
